@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+
+class Student {
+private:
+    int rollNo;
+    string name;
+    static int count;
+
+public:
+    
+    Student(int rollNo, string name) {
+        this->rollNo = rollNo;
+        this->name = name;
+        count++;
+    }
+
+    
+    inline void display() {
+        cout << "Roll Number: " << this->rollNo << endl;
+        cout << "Name: " << this->name << endl;
+    }
+
+    
+    static void showCount() {
+        cout << "Total Students: " << count << endl;
+    }
+
+    
+    friend class StudentInfo;
+};
+
+
+int Student::count = 0;
+
+
+class StudentInfo {
+public:
+    void showDetails(Student s) {
+        cout << "\nAccessing Private Members using Friend Class:" << endl;
+        cout << "Roll Number: " << s.rollNo << endl;
+        cout << "Name: " << s.name << endl;
+    }
+};
+
+int main() {
+    
+    Student s1(101, "Jayesh");
+    Student s2(102, "Litesh");
+
+    cout << "Student Details:" << endl;
+
+    s1.display();
+    cout << endl;
+
+    s2.display();
+
+    
+    cout << endl;
+    Student::showCount();
+
+    
+    StudentInfo info;
+    info.showDetails(s1);
+
+    return 0;
+}
